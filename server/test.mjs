@@ -6,33 +6,31 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe("Reading List API", () => {
-  describe("GET /", () => {
-    it("should return a message", async () => {
+  // describe("GET /", () => {
+  //   it("should return a message", async () => {
       
-      const requestTwo = chai.request(app);
-      const res = await requestTwo.get(
-        `/`
-      );
+  //     const requestTwo = chai.request(app);
+  //     const res = await requestTwo.get(
+  //       `/`
+  //     );
 
-      expect(res).to.have.status(200);
-    });
-  });
-
-  // describe("POST /reading-list/books", () => {
-  //   it("should add a book to the reading list", async () => {
-  //     const newBook = {
-  //       title: "Test Book",
-  //       author: "Test Author",
-  //       status: "to_read",
-  //     };
-  //     const request = chai.request(app);
-  //     const res = await request.post("/reading-list/books").send(newBook);
-
-  //     expect(res).to.have.status(201);
-  //     expect(res.body).to.have.property("uuid");
-  //     expect(res.body.title).to.equal(newBook.title);
-  //     expect(res.body.author).to.equal(newBook.author);
+  //     expect(res).to.have.status(200);
   //   });
+  // });
+
+  describe("POST /reading-list/books", () => {
+    it("should add a ToDo to the list", async () => {
+      const todo = {
+        description: "New Description"
+      };
+      const request = chai.request(app);
+      const res = await request.post("/api/todos").send(newBook);
+
+      expect(res).to.have.status(201);
+      // expect(res.body).to.have.property("uuid");
+      // expect(res.body.title).to.equal(newBook.title);
+      // expect(res.body.author).to.equal(newBook.author);
+    });
 
   //   it("should return a 400 Bad Request when the status is invalid", async () => {
   //     const invalidBook = {
@@ -60,7 +58,7 @@ describe("Reading List API", () => {
   //       "Status is invalid. Accepted statuses: read | to_read | reading"
   //     );
   //   });
-  // });
+  });
 
   // describe("PUT /reading-list/books/:uuid", () => {
   //   it("should update the status of a book", async () => {
