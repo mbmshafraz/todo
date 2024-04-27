@@ -1,10 +1,10 @@
 import express from "express";
+import cors from "cors";
+import pool from "./db.mjs";
 // import cache from "./cache.mjs"; 
 import { v4 as uuidv4 } from "uuid";
 
 const app = express();
-const cors = require("cors");
-const pool = require("./db")
 
 //middleware
 app.use(cors());
