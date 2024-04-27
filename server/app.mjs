@@ -84,11 +84,11 @@ app.delete("/todos/:id", async (req, res) => {
 
 //
 
-app.use("*", (_, res) => {
-  return res
-    .status(404)
-    .json({ error: "the requested resource does not exist on this server" });
-});
+// app.use("*", (_, res) => {
+//   return res
+//     .status(404)
+//     .json({ error: "the requested resource does not exist on this server" });
+// });
 
 
 export default app;
