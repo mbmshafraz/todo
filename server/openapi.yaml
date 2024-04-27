@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Choreo Sample - Book List - Nodejs REST API Service
+  title: ToDo List - Nodejs REST API Service
   description: >-
-    This is a sample API specification for a simple reading list application with in-memory cache
+    This is the backend of To Do list app
     written in Nodejs
   license:
     name: Apache 2.0
@@ -14,16 +14,16 @@ externalDocs:
 servers:
   - url: http://localhost:8080
 tags:
-  - name: books
-    description: In-memory book list cache API
+  - name: ToDo list
+    description: ToDo list
 paths:
-  /books:
-    summary: List all books
+  /todos:
+    summary: List all ToDos
     get:
-      summary: List all books
-      operationId: ListAllBooks
+      summary: List all ToDos
+      operationId: ListAllToDos
       tags:
-        - books
+        - todos
       responses:
         "200":
           description: Successful operation
@@ -32,32 +32,32 @@ paths:
               schema:
                 $ref: "#/components/schemas/StringArray"
     post:
-      summary: Insert a new book
-      operationId: SetNewBook
+      summary: Insert a new ToDo
+      operationId: SetNewToDo
       responses:
         "200":
           description: Successful operation
         "400":
           description: Invalid request body
       tags:
-        - books
+        - todos
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/KeyValue"
 
-  /books/{uuid}:
-    summary: Get book by UUID
+  /todos/{todo_id}:
+    summary: Get book by todo_id
     get:
       tags:
-        - books
-      summary: Get book by UUID
-      operationId: GetBookByUUID
+        - todos
+      summary: Get book by todo_id
+      operationId: GetBookByTODOId
       parameters:
-        - name: uuid
+        - name: todo_id
           in: path
-          description: UUID of book to return
+          description: todo_id of ToDo to return
           required: true
           schema:
             type: string
@@ -69,17 +69,17 @@ paths:
               schema:
                 $ref: "#/components/schemas/KeyValue"
         "404":
-          description: UUID not found
+          description: ToDo not found
     delete:
       tags:
-        - books
-      summary: Delete book by UUID
-      description: Deletes a single book based on the UUID supplied
-      operationId: DeleteBookByUUID
+        - todos
+      summary: Delete ToDo by todo_id
+      description: Deletes a single ToDo based on the todo_id supplied
+      operationId: DeleteBookByToDoId
       parameters:
-        - name: uuid
+        - name: todo_id
           in: path
-          description: UUID of book to delete
+          description: todo_id of ToDo to delete
           required: true
           schema:
             type: string
@@ -87,17 +87,17 @@ paths:
         "200":
           description: Successful operation
         "404":
-          description: ISBN not found
+          description: todo not found
     put:
       tags:
-        - books
-      summary: Update book status by UUID
-      description: Updates the status of the book based on the UUID supplied
-      operationId: UpdateBookStatusByUUID
+        - todos
+      summary: Update book status by todo_id
+      description: Updates the ToDo based on the todo_id supplied
+      operationId: UpdateBookStatusByToDoId
       parameters:
-        - name: uuid
+        - name: todo_id
           in: path
-          description: UUID of book to update
+          description: ToDo to update
           required: true
           schema:
             type: string
@@ -105,7 +105,7 @@ paths:
         "200":
           description: Successful operation
         "404":
-          description: UUID not found
+          description: todo_id not found
       requestBody:
         content:
           application/json:
@@ -125,9 +125,9 @@ components:
     Key:
       type: object
       properties:
-        uuid:
-          type: string
-          example: "my-uuid"
+        todo_id:
+          type: int
+          example: 01
     Status:
       type: object
       properties:
@@ -137,19 +137,15 @@ components:
     KeyValue:
       type: object
       required:
-        - title
-        - author
-        - status
+        - todo_id
+        - description
       properties:
         title:
+          type: int
+          example: 01
+        description:
           type: string
-          example: "my-title"
-        author:
-          type: string
-          example: "my-author"
-        status:
-          type: string
-          example: "read"
+          example: "my-todo"
     StringArray:
       type: array
       items:
